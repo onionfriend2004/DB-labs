@@ -4,6 +4,9 @@ clean:
 build:
 	docker-compose build
 
-run: clean build
+stop:
+	docker-compose stop
+	
+run: stop build
 	docker-compose up -d
 	python ./lab1/app.py   
