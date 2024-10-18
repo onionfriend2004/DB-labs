@@ -19,7 +19,7 @@ def product_handler():
     if response.status:
         return render_template("input_category.html", categories=response.result)
     else:
-        return response.error_message, 500
+        return response.error_message
 
 @app.route("/", methods=['POST'])
 def product_result_handler():
@@ -28,7 +28,7 @@ def product_result_handler():
     response = model_route(app.config['db_config'], user_input_data, provider)
 
     if not response.status:
-        return response.error_message, 500
+        return response.error_message
 
     prod_title = 'Результаты из БД'
     return render_template("dynamic.html", prod_title=prod_title, products=response.result)
