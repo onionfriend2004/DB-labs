@@ -7,18 +7,14 @@
 <body>
     <h2>Ввод параметров запроса:</h2>
     <form method="POST" action="">
-        <label for="prod_category"> Категория продуктов: </label>
-        <!--<select name="prod_category">
-            <option value="1">Мясо</option>
-            <option value="2">Молочные продукты</option>
+        <label for="prod_category">Категория продуктов:</label>
+        <select name="prod_category" id="prod_category">
+            {% for category in categories %}
+                <option value="{{ category }}">{{ category }}</option>
+            {% endfor %}
         </select>
-        <br><br>
-        -->
-        <input type="text" id="prod_category" name="prod_category" />
         <br><br>
         <input type="submit" value="Отправить"/>
     </form>
-
-
 </body>
 </html>

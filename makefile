@@ -9,4 +9,4 @@ stop:
 	
 run: stop build
 	docker-compose up -d
-	python ./lab1/app.py   
+	python3 ./lab1/app.py   

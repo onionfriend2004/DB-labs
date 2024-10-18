@@ -1,0 +1,1 @@
+SELECT DISTINCT prod_category FROM product;

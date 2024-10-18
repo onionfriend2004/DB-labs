@@ -1,9 +1,11 @@
 services:
   db:
     build:
-      dockerfile: mysql.Dockerfile
+      dockerfile: build/mysql.Dockerfile
     ports:
       - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes  # Разрешить запуск без пароля
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       timeout: 10s

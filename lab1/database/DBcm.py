@@ -1,9 +1,7 @@
 from pymysql import connect
-
 from pymysql.err import OperationalError
 
 class DBContextManager:
-
     def __init__(self, db_config: dict):
         self.conn = None
         self.cursor = None
@@ -15,18 +13,21 @@ class DBContextManager:
             self.cursor = self.conn.cursor()
             return self.cursor
         except OperationalError as err:
-            print(err.args)
+            print(f"OperationalError: {err}")
+            return None
+        except AttributeError as err:
+            print(f"AttributeError: {err}")
             return None
 
     def __exit__(self, exc_type, exc_val, exc_tb):
-        # в параметрах метода лежат ошибки, которые передаёт sql сервер при ошибке
         if exc_type:
-            print(exc_type)
+            print(f"Exception type: {exc_type}")
         if self.cursor:
             if exc_type:
-            # если на этапе выполнения произошли ошибки, но курсор при этом открыт, то скорее всего это транзакция и её надо откатить
                 self.conn.rollback()
             else:
                 self.conn.commit()
             self.cursor.close()
+        if self.conn:
+            self.conn.close()
         return True
